@@ -32,10 +32,10 @@ def format_data(data):
         for entitie in entities:
             if create_item_to_db(entitie) is not None:
                 t = """
-                ### {}
+                *{}*
 
                 {}（[来源]({})）
-                """.format(entitie.get('title'), entitie.get('description'), entitie.get('source_url'))
+                """.format(entitie.get('title', '').strip(), entitie.get('description', '').strip(), entitie.get('source_url'))
                 send_message(t)
 
 
