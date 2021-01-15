@@ -64,7 +64,7 @@ def send_message(text):
     """
     telegram = helper.helper.config('telegram')
     bot = telepot.Bot(telegram['token'])
-    print(bot.getMe())
+    print(bot.getUpdates())
     # bot.sendMessage(telegram['chat_id'], text, 'Markdown')
 
 
