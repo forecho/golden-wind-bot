@@ -33,12 +33,11 @@ def format_data(data):
             if create_item_to_db(entitie) is not None:
                 t = """
                 <b>{}</b>
-                {}
-                """.format(entitie.get('title', '').strip(), entitie.get('description', '').strip())
-                if entitie.get('source_url'):
-                    t = '{}（<a href="{}">来源</a>）'.format(
-                        t, entitie.get('source_url')
-                    )
+{}""".format(entitie.get('title', '').strip(), entitie.get('description', '').strip())
+                # if entitie.get('source_url'):
+                #     t = '{}（<a href="{}">来源</a>）'.format(
+                #         t, entitie.get('source_url')
+                #     )
                 send_message(t)
 
 
