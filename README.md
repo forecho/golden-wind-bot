@@ -12,3 +12,12 @@ pip3 install telepot --upgrade
 ```
 cp config.yml.example config.yml
 ```
+
+
+获取 Telegram `chat_id` :
+
+```
+python3 test_telegram.py
+```
+
+然后给 telegram bot 发消息，查看终端，第三个参数就是。
