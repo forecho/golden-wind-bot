@@ -31,12 +31,12 @@ def format_data(data):
         entities = section.get('entities', [])
         for entitie in entities:
             if create_item_to_db(entitie) is not None:
-                return """
+                t = """
                 ### {}
 
                 {}（[来源]({})）
                 """.format(entitie.get('title'), entitie.get('description'), entitie.get('source_url'))
-    return ""
+                send_message(t)
 
 
 def create_item_to_db(entitie):
@@ -73,6 +73,4 @@ def send_message(text):
 
 if __name__ == "__main__":
     data = get_data()
-    new_data = format_data(data)
-    if new_data:
-        send_message(new_data)
+    format_data(data)
