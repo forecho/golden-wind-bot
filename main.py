@@ -32,9 +32,13 @@ def format_data(data):
         for entitie in entities:
             if create_item_to_db(entitie) is not None:
                 t = """
-                *{}*
-                {}（[来源]({})）
-                """.format(entitie.get('title', '').strip(), entitie.get('description', '').strip(), entitie.get('source_url'))
+                <b>{}</b>
+                {}
+                """.format(entitie.get('title', '').strip(), entitie.get('description', '').strip())
+                if entitie.get('source_url'):
+                    t = '{}（<a href="{}">来源</a>）'.format(
+                        t, entitie.get('source_url')
+                    )
                 send_message(t)
 
 
@@ -67,7 +71,7 @@ def send_message(text):
     """
     telegram = helper.helper.config('telegram')
     bot = telepot.Bot(telegram['token'])
-    bot.sendMessage(telegram['chat_id'], text, 'Markdown')
+    bot.sendMessage(telegram['chat_id'], text, 'HTML')
 
 
 if __name__ == "__main__":
