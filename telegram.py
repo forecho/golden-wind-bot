@@ -10,13 +10,15 @@ from telepot.loop import MessageLoop
 
 
 def handle(msg):
-    text, chat_type, chat_id = telepot.glance(msg)
-    print(text, chat_type, chat_id)
-    r = re.match(r'^\$(\w+)', text)
-    if r:
-        t = stock.get_price(r.group(1))
-        bot = get_bot()
-        bot.sendMessage(chat_id, t)
+    content_type, chat_type, chat_id, text, message_id = telepot.glance(
+        msg, long=True)
+    print(content_type, chat_type, chat_id, text, message_id)
+    if content_type == 'text':
+        r = re.match(r'^\$(\w+)', text)
+        if r:
+            t = stock.get_price(r.group(1))
+            bot = get_bot()
+            bot.sendMessage(chat_id, t)
 
 
 def get_bot():
