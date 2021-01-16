@@ -34,7 +34,7 @@ def format_data(data):
         for entitie in entities:
             if create_item_to_db(entitie) is not None:
                 t = """
-                *{}*
+                <b>{}</b>
 
 {}""".format(entitie.get('title', '').strip(), entitie.get('description', '').strip())
                 # if entitie.get('source_url'):

@@ -33,7 +33,7 @@ def test():
         time.sleep(10)
 
 
-def send_message(text, parse_mode='MarkdownV2'):
+def send_message(text, parse_mode='HTML'):
     """
     docstring
     """
