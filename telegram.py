@@ -17,8 +17,9 @@ def handle(msg):
         r = re.match(r'^\$(\w+)', msg['text'])
         if r:
             t = stock.get_price(r.group(1))
-            bot = get_bot()
-            bot.sendMessage(chat_id, t, parse_mode='HTML')
+            if t:
+                bot = get_bot()
+                bot.sendMessage(chat_id, t, parse_mode='HTML')
 
 
 def get_bot():
