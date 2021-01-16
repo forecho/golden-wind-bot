@@ -7,6 +7,7 @@ from hashlib import md5
 import telepot
 import helper
 import os
+import telegram
 
 
 def get_data():
@@ -33,14 +34,14 @@ def format_data(data):
         for entitie in entities:
             if create_item_to_db(entitie) is not None:
                 t = """
-                <b>{}</b>
+                *{}*
 
 {}""".format(entitie.get('title', '').strip(), entitie.get('description', '').strip())
                 # if entitie.get('source_url'):
                 #     t = '{}（<a href="{}">来源</a>）'.format(
                 #         t, entitie.get('source_url')
                 #     )
-                send_message(t)
+                telegram.send_message(t)
 
 
 def create_item_to_db(entitie):
@@ -65,15 +66,6 @@ def create_item_to_db(entitie):
         return entitie
     else:
         return None
-
-
-def send_message(text):
-    """
-    docstring
-    """
-    telegram = helper.helper.config('telegram')
-    bot = telepot.Bot(telegram['token'])
-    bot.sendMessage(telegram['chat_id'], text, 'HTML')
 
 
 if __name__ == "__main__":

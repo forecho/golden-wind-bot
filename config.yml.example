@@ -1,3 +1,6 @@
 telegram:
   token: "xxx:xxx"
   chat_id: ""
+
+finnhub:
+  token: "xxx"
