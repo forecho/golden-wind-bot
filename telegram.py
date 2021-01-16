@@ -14,12 +14,11 @@ def handle(msg):
         msg, long=True)
     print(content_type, chat_type, chat_id, date, message_id)
     if content_type == 'text':
-        print(msg)
         r = re.match(r'^\$(\w+)', msg['text'])
         if r:
             t = stock.get_price(r.group(1))
             bot = get_bot()
-            bot.sendMessage(chat_id, t)
+            bot.sendMessage(chat_id, t, parse_mode='HTML')
 
 
 def get_bot():
