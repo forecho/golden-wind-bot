@@ -33,13 +33,13 @@ def test():
         time.sleep(10)
 
 
-def send_message(text):
+def send_message(text, parse_mode='MarkdownV2'):
     """
     docstring
     """
     bot = get_bot()
     telegram = helper.config('telegram')
-    bot.sendMessage(telegram['chat_id'], text, 'MarkdownV2')
+    bot.sendMessage(telegram['chat_id'], text, parse_mode=parse_mode)
 
 
 if __name__ == "__main__":
