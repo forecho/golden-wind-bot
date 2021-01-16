@@ -6,6 +6,7 @@ import sqlite3
 from hashlib import md5
 import telepot
 import helper
+import os
 
 
 def get_data():
@@ -46,12 +47,13 @@ def create_item_to_db(entitie):
     """
     docstring
     """
+    current_path = os.path.dirname(os.path.abspath(__file__))
     text = '{}_{}'.format(
         entitie.get('title'),
         entitie.get('description')
     )
     symbol = str(md5(text.encode("utf-8")).hexdigest()).lower()
-    conn = sqlite3.connect('golden_wind.db')
+    conn = sqlite3.connect("{}/golden_wind.db".format(current_path))
     c = conn.cursor()
     c.execute('SELECT * FROM news WHERE symbol=?', (symbol,))
     date = ""
