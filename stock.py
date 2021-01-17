@@ -13,6 +13,7 @@ def get_price(symbol):
     s = symbol.upper()
     finnhub = helper.config('finnhub')
     url = 'https://finnhub.io/api/v1/quote?symbol={}&token={}'
+    print(url.format(s, finnhub['token']))
     r = requests.get(url.format(s, finnhub['token']))
     data = r.json()
     if data.get('o', 0) != 0:
