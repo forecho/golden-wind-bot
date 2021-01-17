@@ -10,9 +10,10 @@ def get_price(symbol):
     """
     docstring
     """
+    s = symbol.upper()
     finnhub = helper.config('finnhub')
     url = 'https://finnhub.io/api/v1/quote?symbol={}&token={}'
-    r = requests.get(url.format(symbol.upper(), finnhub['token']))
+    r = requests.get(url.format(s, finnhub['token']))
     data = r.json()
     if data.get('o', 0) != 0:
         return ''
@@ -22,7 +23,7 @@ def get_price(symbol):
 当天的低价: {}
 此刻价格: {}
 上一个收盘价: {}
-""".format(symbol, data.get('o'), data.get('h'), data.get('l'), data.get('c'), data.get('pc'))
+""".format(s, data.get('o'), data.get('h'), data.get('l'), data.get('c'), data.get('pc'))
 
 
 if __name__ == "__main__":
