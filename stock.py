@@ -16,6 +16,7 @@ def get_price(symbol):
     print(url.format(s, finnhub['token']))
     r = requests.get(url.format(s, finnhub['token']))
     data = r.json()
+    print(data)
     if data.get('o', 0) != 0:
         return ''
     return """<b>{} 最新报价</b>
@@ -30,4 +31,5 @@ def get_price(symbol):
 if __name__ == "__main__":
     if sys.argv[1]:
         text = get_price(sys.argv[1])
-        telegram.send_message(text)
+        if text:
+            telegram.send_message(text)
