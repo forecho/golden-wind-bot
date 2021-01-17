@@ -12,7 +12,7 @@ def get_price(symbol):
     """
     finnhub = helper.config('finnhub')
     url = 'https://finnhub.io/api/v1/quote?symbol={}&token={}'
-    r = requests.get(url.format(symbol, finnhub['token']))
+    r = requests.get(url.format(symbol.upper(), finnhub['token']))
     data = r.json()
     if data.get('o', 0) != 0:
         return ''
