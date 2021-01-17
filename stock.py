@@ -17,7 +17,7 @@ def get_price(symbol):
     r = requests.get(url.format(s, finnhub['token']))
     data = r.json()
     print(data)
-    if data.get('o', 0) != 0:
+    if data.get('o', 0) == 0:
         return ''
     return """<b>{} 最新报价</b>
 当日开盘价: {}
