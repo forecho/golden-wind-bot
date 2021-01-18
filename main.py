@@ -57,7 +57,7 @@ def create_item_to_db(entitie):
     conn = sqlite3.connect("{}/golden_wind.db".format(current_path))
     c = conn.cursor()
     c.execute('SELECT * FROM news WHERE symbol=?', (symbol,))
-    date = ""
+    date = entitie.get('publish_at')
     if c.fetchone() is None:
         # 优化效率
         c.execute("INSERT INTO news VALUES (?,?)", (symbol, date))
