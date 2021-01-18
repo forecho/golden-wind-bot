@@ -3,6 +3,7 @@
 import requests
 import db
 import telegram
+import datetime
 
 
 def trades():
@@ -12,9 +13,9 @@ def trades():
     for item in ['ARKK']:
         # for item in ['ARKK', 'ARKQ', 'ARKW', 'ARKG', 'ARKF']:
         data = trade(item)
-        t = before_send(data)
-        telegram.send_message(t)
-        print(t)
+        if data is not None:
+            t = before_send(data)
+            telegram.send_message(t)
 
 
 def trade(symbol):
@@ -26,8 +27,11 @@ def trade(symbol):
     print(url)
     r = requests.get(url.format(symbol), headers=headers)
     d = r.json()
-    db.create_if_not_exist(r.text, d.get('date_from'))
-    return d
+    date = int(datetime.datetime.strptime(
+        d.get('date_from'), '%Y-%m-%d').strftime("%s"))
+    if db.create_if_not_exist(r.text, date):
+        return d
+    return None
 
 
 def before_send(data):
