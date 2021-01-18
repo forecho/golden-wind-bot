@@ -10,8 +10,8 @@ def trades():
     """
     docstring
     """
-    for item in ['ARKK']:
-        # for item in ['ARKK', 'ARKQ', 'ARKW', 'ARKG', 'ARKF']:
+    # for item in ['ARKK']:
+    for item in ['ARKK', 'ARKQ', 'ARKW', 'ARKG', 'ARKF']:
         data = trade(item)
         if data is not None:
             t = before_send(data)
