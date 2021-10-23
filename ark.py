@@ -39,8 +39,8 @@ def before_send(data):
     docstring
     """
     direction = {
-        'Buy': "买入",
-        'Sell': "卖出"
+        'Buy': "买入 ✅",
+        'Sell': "卖出 ❌"
     }
     title = '{}基金 {} 仓位变动: '.format(data.get('symbol'), data.get('date_from'))
     texts = []
