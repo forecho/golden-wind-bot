@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from asyncio.windows_events import NULL
 import requests
 import json
 import sqlite3
@@ -33,14 +34,19 @@ def format_data(data):
         entities = section.get('entities', [])
         for entitie in entities:
             if create_item_to_db(entitie) is not None:
+                description =  entitie.get('description', '').strip()
+                title = entitie.get('title', '').strip()
                 t = """
                 <b>{}</b>
 
-{}""".format(entitie.get('title', '').strip(), entitie.get('description', '').strip())
+{}""".format(title, description)
                 # if entitie.get('source_url'):
                 #     t = '{}（<a href="{}">来源</a>）'.format(
                 #         t, entitie.get('source_url')
                 #     )
+                      
+                send_dircord(title, description)
+
                 telegram.send_message(t)
 
 
@@ -67,6 +73,25 @@ def create_item_to_db(entitie):
     else:
         return None
 
+
+
+def send_dircord(title, desc):
+    """
+    docstring
+    """
+    discord_webhook_url = helper.config('discord_webhook_url')
+    if discord_webhook_url is None:
+        return
+
+    data["embeds"] = [
+        {
+            "description" : desc,
+            "title" : title
+        }
+    ]
+    response = requests.post(discord_webhook_url, json=data)
+    print(response.status_code)
+    print(response.content)
 
 if __name__ == "__main__":
     data = get_data()

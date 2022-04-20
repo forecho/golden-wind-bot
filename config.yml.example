@@ -4,3 +4,5 @@ telegram:
 
 finnhub:
   token: "xxx"
+
+discord_webhook_url:
