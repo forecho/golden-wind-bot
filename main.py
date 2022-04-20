@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from asyncio.windows_events import NULL
 import requests
 import json
 import sqlite3
 from hashlib import md5
-import telepot
 import helper
 import os
 import telegram
