@@ -25,9 +25,9 @@ def trade(symbol):
     docstring
     """
     headers = {'Content-Type': 'application/json'}
-    url = 'https://arkfunds.io/api/v1/etf/trades?symbol={}&period=1d'
+    url = 'https://arkfunds.io/api/v1/etf/trades?symbol={}&period=1d'.format(symbol)
     print(url)
-    r = requests.get(url.format(symbol), headers=headers)
+    r = requests.get(url, headers=headers)
     d = r.json()
     date = int(datetime.datetime.strptime(
         d.get('date_from'), '%Y-%m-%d').strftime("%s"))
