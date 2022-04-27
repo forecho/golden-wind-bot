@@ -10,8 +10,6 @@ class Discord:
         
     @staticmethod
     def send_message(title, desc):
-        print(title)
-        print(desc)
         """
         docstring
         """

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import requests
 import db
+from message.discord import Discord
 from message.telegram import Telegram
 import datetime
 
@@ -16,6 +17,7 @@ def trades():
         if data is not None:
             t = before_send(data)
             Telegram.send_message(t)
+            Discord.send_message(None, t)
 
 
 def trade(symbol):
