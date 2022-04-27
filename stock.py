@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import requests
 import helper
-import telegram
+from message.telegram import Telegram
 import sys
 
 
@@ -32,4 +32,4 @@ if __name__ == "__main__":
     if sys.argv[1]:
         text = get_price(sys.argv[1])
         if text:
-            telegram.send_message(text)
+            Telegram.send_message(text)

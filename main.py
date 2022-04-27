@@ -7,8 +7,9 @@ from hashlib import md5
 import helper
 import db
 import os
-import message.telegram as telegram
-import message.discord as discord
+
+from message.discord import Discord
+from message.telegram import Telegram
 
 
 def get_data():
@@ -45,8 +46,8 @@ def format_data(data):
                 #         t, entitie.get('source_url')
                 #     )
                       
-                discord.send_message(title, description)
-                telegram.send_message(t)
+                Discord.send_message(title, description)
+                Telegram.send_message(t)
 
 
 def create_item_to_db(entitie):
