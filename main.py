@@ -5,8 +5,10 @@ import json
 import sqlite3
 from hashlib import md5
 import helper
+import db
 import os
-import telegram
+import message.telegram as telegram
+import message.discord as discord
 
 
 def get_data():
@@ -43,8 +45,7 @@ def format_data(data):
                 #         t, entitie.get('source_url')
                 #     )
                       
-                send_dircord(title, description)
-
+                discord.send_message(title, description)
                 telegram.send_message(t)
 
 
@@ -52,44 +53,15 @@ def create_item_to_db(entitie):
     """
     docstring
     """
-    current_path = os.path.dirname(os.path.abspath(__file__))
     text = '{}_{}'.format(
         entitie.get('title'),
         entitie.get('description')
     )
-    symbol = str(md5(text.encode("utf-8")).hexdigest()).lower()
-    conn = sqlite3.connect("{}/golden_wind.db".format(current_path))
-    c = conn.cursor()
-    c.execute('SELECT * FROM news WHERE symbol=?', (symbol,))
     date = entitie.get('publish_at')
-    if c.fetchone() is None:
-        # 优化效率
-        c.execute("INSERT INTO news VALUES (?,?)", (symbol, date))
-        conn.commit()
-        conn.close()
+    if db.create_if_not_exist(text, date):
         return entitie
     else:
         return None
-
-
-
-def send_dircord(title, desc):
-    """
-    docstring
-    """
-    discord_webhook_url = helper.config('discord_webhook_url')
-    if discord_webhook_url is None:
-        return
-
-    data["embeds"] = [
-        {
-            "description" : desc,
-            "title" : title
-        }
-    ]
-    response = requests.post(discord_webhook_url, json=data)
-    print(response.status_code)
-    print(response.content)
 
 if __name__ == "__main__":
     data = get_data()
