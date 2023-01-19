@@ -18,7 +18,7 @@ def get_data():
     """
     payload = {
         'section_ids': [1156, 1152, 1153, 1154, 1155],
-        "important": True
+        "important": 1
     }
     url = 'https://m.lbkrs.com/api/forward/v2/news/sections'
     r = requests.post(url, data=payload)

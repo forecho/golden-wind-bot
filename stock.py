@@ -20,11 +20,11 @@ def get_price(symbol):
     if data.get('o', 0) == 0:
         return ''
     return """<b>{} 最新报价</b>
-当日开盘价: {}
-当天的高价: {}
-当天的低价: {}
-此刻价格: {}
-上一个收盘价: {}
+当日开盘价：{}
+当天的高价：{}
+当天的低价：{}
+此刻价格：{}
+上一个收盘价：{}
 """.format(s, data.get('o'), data.get('h'), data.get('l'), data.get('c'), data.get('pc'))
 
 
