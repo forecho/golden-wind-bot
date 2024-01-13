@@ -6,3 +6,4 @@ finnhub:
   token: "xxx"
 
 discord_webhook_url:
+slack_webhook_url:

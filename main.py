@@ -9,6 +9,7 @@ import db
 import os
 
 from message.discord import Discord
+from message.discord import Slack
 from message.telegram import Telegram
 
 
@@ -47,6 +48,7 @@ def format_data(data):
                 #     )
                       
                 Discord.send_message(title, description)
+                Slack.send_message(title, description)
                 Telegram.send_message(t)
 
 

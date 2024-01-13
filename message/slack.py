@@ -1,0 +1,31 @@
+# !/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import requests
+import helper
+
+class Slack:
+    def __init__(self):
+        print('init')
+        
+    @staticmethod
+    def send_message(title, desc):
+        """
+        docstring
+        """
+        slack_webhook_url = helper.config('slack_webhook_url')
+        if slack_webhook_url is None:
+            return
+        data = {}
+        data["blocks"] = [
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "*{}*\n {}".format(title, desc)
+                }
+            }
+        ]
+        response = requests.post(slack_webhook_url, json=data)
+        print(response.status_code)
+        print(response.content)
