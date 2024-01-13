@@ -9,7 +9,7 @@ import db
 import os
 
 from message.discord import Discord
-from message.discord import Slack
+from message.slack import Slack
 from message.telegram import Telegram
 
 
