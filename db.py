@@ -11,7 +11,7 @@ def conn_db():
     docstring
     """
     current_path = os.path.dirname(os.path.abspath(__file__))
-    conn = sqlite3.connect("{}/golden_wind.db".format(current_path))
+    conn = sqlite3.connect("{}/news.db".format(current_path))
     return conn
 
 
