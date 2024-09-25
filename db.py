@@ -15,22 +15,39 @@ def conn_db():
     return conn
 
 
+def create_table_if_not_exists():
+    """
+    创建 news 表（如果不存在）
+    """
+    conn = sqlite3.connect('news.db')
+    c = conn.cursor()
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS news
+        (id INTEGER PRIMARY KEY AUTOINCREMENT,
+         symbol TEXT UNIQUE,
+         date INTEGER)
+    ''')
+    conn.commit()
+    conn.close()
+
+
 def create_if_not_exist(text, date):
     """
-    docstring
+    如果记录不存在，则创建新记录
     """
-    conn = conn_db()
+    create_table_if_not_exists()  # 确保表存在
+    
+    conn = sqlite3.connect('news.db')
     c = conn.cursor()
-    symbol = str(md5(text.encode("utf-8")).hexdigest()).lower()
+    symbol = md5(text.encode('utf-8')).hexdigest()
     c.execute('SELECT * FROM news WHERE symbol=?', (symbol,))
     if c.fetchone() is None:
-        # 优化效率
-        c.execute("INSERT INTO news VALUES (?,?)", (symbol, date))
+        c.execute('INSERT INTO news (symbol, date) VALUES (?, ?)', (symbol, date))
         conn.commit()
         conn.close()
         return True
-    else:
-        return False
+    conn.close()
+    return False
 
 
 def clear():
