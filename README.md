@@ -4,6 +4,7 @@
 pip3 install requests
 pip3 install pyyaml
 pip3 install telepot --upgrade
+pip3 install slack_sdk
 ```
 
 ## 使用方法

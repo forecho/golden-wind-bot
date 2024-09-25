@@ -7,7 +7,7 @@ def db():
     """
     docstring
     """
-    conn = sqlite3.connect('golden_wind.db')
+    conn = sqlite3.connect('news.db')
     c = conn.cursor()
     c.execute('''CREATE TABLE news (symbol text, date text)''')
     conn.commit()
