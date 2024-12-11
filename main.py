@@ -22,15 +22,24 @@ def get_data():
     """
     获取数据
     """
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        'Accept': 'application/json, text/plain, */*',
+        'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+        'Referer': 'https://chaomeigu.com/',
+        'Origin': 'https://chaomeigu.com',
+        'Connection': 'keep-alive',
+    }
+    
     payload = {
         'page': 1,
-        'page_size': 20,  # 可以根据需要调整
+        'page_size': 20,
         "score": 0
     }
-    url = 'https://api.chaomeigu.com/v1/news/latest'  # 移除了查询参数
+    url = 'https://api.chaomeigu.com/v1/news/latest'
     try:
-        r = requests.get(url, params=payload)  # 使用 GET 请求和 params 参数
-        r.raise_for_status()  # 检查请求是否成功
+        r = requests.get(url, params=payload, headers=headers)  # 添加 headers 参数
+        r.raise_for_status()
         return r.json()
     except requests.RequestException as e:
         print(f"请求错误：{e}")
